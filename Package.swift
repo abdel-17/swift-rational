@@ -8,20 +8,20 @@ let package = Package(
 	products: [
 		.library(
 			name: "RationalModule",
-			targets: [
-				"RationalModule"
-			]
+			targets: ["RationalModule"]
+		)
+	],
+	dependencies: [
+		.package(
+			url: "https://github.com/apple/swift-format.git",
+			exact: "509.0.0"
 		)
 	],
 	targets: [
-		.target(
-			name: "RationalModule"
-		),
+		.target(name: "RationalModule"),
 		.testTarget(
 			name: "RationalModuleTests",
-			dependencies: [
-				"RationalModule"
-			]
-		),
+			dependencies: ["RationalModule"]
+		)
 	]
 )
