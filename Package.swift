@@ -4,17 +4,24 @@
 import PackageDescription
 
 let package = Package(
-    name: "swift-rational",
-    products: [
-        .library(
-            name: "RationalModule",
-            targets: ["RationalModule"]),
-    ],
-    targets: [
-        .target(
-            name: "RationalModule"),
-        .testTarget(
-            name: "RationalModuleTests",
-            dependencies: ["RationalModule"]),
-    ]
+	name: "swift-rational",
+	products: [
+		.library(
+			name: "RationalModule",
+			targets: [
+				"RationalModule"
+			]
+		)
+	],
+	targets: [
+		.target(
+			name: "RationalModule"
+		),
+		.testTarget(
+			name: "RationalModuleTests",
+			dependencies: [
+				"RationalModule"
+			]
+		),
+	]
 )
