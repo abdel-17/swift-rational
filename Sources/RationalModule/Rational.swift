@@ -1,4 +1,4 @@
-public struct Rational<T: SignedInteger> {
+public struct Rational<T: FixedWidthInteger & SignedInteger> {
 	/// The normalized numerator.
 	public let numerator: T
 
@@ -35,6 +35,18 @@ extension Rational {
 	@inlinable
 	public init(_ numerator: T, _ denominator: T) {
 		precondition(denominator != 0, "Denominator must not be zero.")
+
+		// We cannot compute `gcd(0, T.min)` and `gcd(T.min, T.min)` due to overflow,
+		// so we must handle these cases separately.
+		if numerator == 0 {
+			self.init(numerator: 0, denominator: 1)
+			return
+		}
+
+		if numerator == denominator {
+			self.init(numerator: 1, denominator: 1)
+			return
+		}
 
 		let g = gcd(numerator, denominator)
 		var numerator = numerator / g

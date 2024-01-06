@@ -26,4 +26,16 @@ final class FractionTests: XCTestCase {
 		XCTAssertEqual(r.numerator, 2)
 		XCTAssertEqual(r.denominator, 1)
 	}
+
+	func `test_zero_over_int_min_equals_zero`() throws {
+		let r = Rational(0, Int.min)
+		XCTAssertEqual(r.numerator, 0)
+		XCTAssertEqual(r.denominator, 1)
+	}
+
+	func `test_int_min_over_int_min_equals_one`() throws {
+		let r = Rational(Int.min, Int.min)
+		XCTAssertEqual(r.numerator, 1)
+		XCTAssertEqual(r.denominator, 1)
+	}
 }
