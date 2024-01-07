@@ -91,7 +91,7 @@ extension Rational {
 	/// with `denominator` at most `max`.
 	///
 	/// - Precondition: `max >= 1`
-	public func limitDenominator(max: T) -> Self {
+	public func limitDenominator(to max: T) -> Self {
 		precondition(max >= 1, "The value of `max` should be at least 1")
 
 		// Algorithm copied from cpython's fractions module.
