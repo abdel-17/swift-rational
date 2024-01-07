@@ -1,4 +1,4 @@
-public struct Rational<T: FixedWidthInteger & SignedInteger> {
+public struct Rational<T: FixedWidthInteger & SignedInteger>: Hashable {
 	/// The normalized numerator.
 	public let numerator: T
 
