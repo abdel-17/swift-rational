@@ -1,11 +1,21 @@
 public struct Rational<T: FixedWidthInteger & SignedInteger>: Hashable {
-	/// The normalized numerator.
+	/// The numerator of this value.
+	///
+	/// This value is normalized so that it has no
+	/// common factors with `denominator`.
 	public let numerator: T
 
-	/// The normalized denominator.
+	/// The denominator of this value.
+	///
+	/// This value is normalized so that it's positive and
+	/// has no common factors with `numerator`.
 	public let denominator: T
 
-	/// Creates a rational number with the given numerator and denominator.
+	/// Creates a rational value with the given numerator and denominator.
+	///
+	/// The given values must be noramlized, that is:
+	/// 1. `numerator` and `denominator` have no common factors.
+	/// 2. `denominator` is positive.
 	@inlinable
 	internal init(numerator: T, denominator: T) {
 		assert(denominator > 0, "The denominator must be positive")
@@ -18,7 +28,7 @@ public struct Rational<T: FixedWidthInteger & SignedInteger>: Hashable {
 
 // MARK: - Initializers
 extension Rational {
-	/// Creates a rational number from a fraction.
+	/// Creates a rational value from a fraction.
 	///
 	/// The result is normalized so that the numerator and denominator
 	/// have no common factors and the denominator is positive.
@@ -27,10 +37,6 @@ extension Rational {
 	///     Rational(2, 2)      1
 	///     Rational(1, -3)     -1/3
 	///     Rational(6, 3)      2
-	///
-	/// - Parameters:
-	///   - numerator: The numerator of the fraction.
-	///   - denominator: The denominator of the fraction.
 	///
 	/// - Precondition: `denominator != 0`
 	@inlinable
@@ -64,19 +70,19 @@ extension Rational {
 
 // MARK: - Properties
 extension Rational {
-	/// The quotient of `numerator`divided by `denominator`
+	/// The quotient of the numerator divided by the denominator.
 	@inlinable
 	public var quotient: T {
 		numerator / denominator
 	}
 
-	/// The remainder of `numerator` divided by `denominator`.
+	/// The remainder of the numerator divided by the denominator.
 	@inlinable
 	public var remainder: T {
 		numerator % denominator
 	}
 
-	/// The quotient and remainder of `numerator` divided by `denominator`.
+	/// The quotient and remainder of the numerator divided by the denominator.
 	@inlinable
 	public var quotientAndRemainder: (quotient: T, remainder: T) {
 		numerator.quotientAndRemainder(dividingBy: denominator)
@@ -85,7 +91,7 @@ extension Rational {
 
 // MARK: - Helpers
 extension Rational {
-	/// Returns the numerator and denominator of this value as a tuple.
+	/// Returns the numerator and denominator as a tuple.
 	@inlinable
 	public func toRatio() -> (numerator: T, denominator: T) {
 		(numerator, denominator)
@@ -129,6 +135,7 @@ extension Rational {
 	}
 }
 
+/// Equivalent to Python's `//` operator.
 @inlinable
 internal func floorDivision<T: BinaryInteger>(_ a: T, _ b: T) -> T {
 	let (quotient, remainder) = a.quotientAndRemainder(dividingBy: b)
