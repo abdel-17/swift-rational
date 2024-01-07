@@ -65,16 +65,19 @@ extension Rational {
 // MARK: - Properties
 extension Rational {
 	/// The quotient of `numerator`divided by `denominator`
+	@inlinable
 	public var quotient: T {
 		numerator / denominator
 	}
 
 	/// The remainder of `numerator` divided by `denominator`.
+	@inlinable
 	public var remainder: T {
 		numerator % denominator
 	}
 
 	/// The quotient and remainder of `numerator` divided by `denominator`.
+	@inlinable
 	public var quotientAndRemainder: (quotient: T, remainder: T) {
 		numerator.quotientAndRemainder(dividingBy: denominator)
 	}
@@ -83,6 +86,7 @@ extension Rational {
 // MARK: - Helpers
 extension Rational {
 	/// Returns the numerator and denominator of this value as a tuple.
+	@inlinable
 	public func toRatio() -> (numerator: T, denominator: T) {
 		(numerator, denominator)
 	}
@@ -91,6 +95,7 @@ extension Rational {
 	/// with `denominator` at most `max`.
 	///
 	/// - Precondition: `max >= 1`
+	@inlinable
 	public func limitDenominator(to max: T) -> Self {
 		precondition(max >= 1, "The value of `max` should be at least 1")
 
@@ -124,7 +129,8 @@ extension Rational {
 	}
 }
 
-private func floorDivision<T: BinaryInteger>(_ a: T, _ b: T) -> T {
+@inlinable
+internal func floorDivision<T: BinaryInteger>(_ a: T, _ b: T) -> T {
 	let (quotient, remainder) = a.quotientAndRemainder(dividingBy: b)
 	guard remainder != 0 else { return quotient }
 
