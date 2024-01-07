@@ -107,7 +107,7 @@ extension Rational {
 		var d = denominator
 
 		while true {
-			let a = n / d
+			let a = floorDivision(n, d)
 			let q2 = q0 + a * q1
 			guard q2 <= max else { break }
 
@@ -115,11 +115,22 @@ extension Rational {
 			(n, d) = (d, n - a * d)
 		}
 
-		let k = (max - q0) / q1
-		if 2 * d * (q0 + k * q1) <= denominator {
-			return Self(numerator: p1, denominator: q1)
+		let k = floorDivision((max - q0), q1)
+		return if 2 * d * (q0 + k * q1) <= denominator {
+			Self(numerator: p1, denominator: q1)
 		} else {
-			return Self(numerator: p0 + k * p1, denominator: q0 + k * q1)
+			Self(numerator: p0 + k * p1, denominator: q0 + k * q1)
 		}
+	}
+}
+
+private func floorDivision<T: BinaryInteger>(_ a: T, _ b: T) -> T {
+	let (quotient, remainder) = a.quotientAndRemainder(dividingBy: b)
+	guard remainder != 0 else { return quotient }
+
+	return if a >= 0 {
+		quotient
+	} else {
+		quotient - 1
 	}
 }
