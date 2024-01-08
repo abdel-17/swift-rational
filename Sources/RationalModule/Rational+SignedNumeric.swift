@@ -15,6 +15,7 @@ extension Rational: SignedNumeric {
 	/// 	Rational<Int8>(exactly: 100)	Optional(Rational(100, 1))
 	/// 	Rational<Int8>(exactly: 1_000)	nil
 	///
+	@inlinable
 	public init?(exactly source: some BinaryInteger) {
 		guard let value = T(exactly: source) else { return nil }
 		self.init(value)

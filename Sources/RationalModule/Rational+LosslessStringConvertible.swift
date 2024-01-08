@@ -16,6 +16,7 @@ extension Rational: LosslessStringConvertible {
 	///     Rational<Int>("1/0")		// Division by zero.
 	///     Rational<Int8>("128/2")		// 128 is out of bounds for Int8.
 	///
+	@inlinable
 	public init?(_ description: String) {
 		guard let slash = description.firstIndex(of: "/") else {
 			guard let value = T(description) else { return nil }
