@@ -33,10 +33,10 @@ extension Rational {
 	/// The result is normalized so that the numerator and denominator
 	/// have no common factors and the denominator is positive.
 	///
-	///     Rational(2, 4)      1/2
-	///     Rational(2, 2)      1
-	///     Rational(1, -3)     -1/3
-	///     Rational(6, 3)      2
+	///     Rational(2, 4)     // 1/2
+	///     Rational(2, 2)     // 1
+	///     Rational(1, -3)    // -1/3
+	///     Rational(6, 3)     // 2
 	///
 	/// - Precondition: `denominator != 0`
 	@inlinable

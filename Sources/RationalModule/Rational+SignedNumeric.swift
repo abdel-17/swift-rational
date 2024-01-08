@@ -12,8 +12,8 @@ extension Rational: SignedNumeric {
 	/// Converts the given integer to a rational value,
 	/// if it can be represented exactly.
 	///
-	/// 	Rational<Int8>(exactly: 100)	Optional(Rational(100, 1))
-	/// 	Rational<Int8>(exactly: 1_000)	nil
+	/// 	Rational<Int8>(exactly: 100)      // Rational(100, 1)
+	/// 	Rational<Int8>(exactly: 1_000)    // nil
 	///
 	@inlinable
 	public init?(exactly source: some BinaryInteger) {
