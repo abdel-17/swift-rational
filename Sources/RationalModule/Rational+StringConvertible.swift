@@ -1,8 +1,11 @@
 extension Rational: CustomStringConvertible {
 	@inlinable
 	public var description: String {
-		guard denominator != 1 else { return "\(numerator)" }
-		return "\(numerator)/\(denominator)"
+		if denominator == 1 {
+			"\(numerator)"
+		} else {
+			"\(numerator)/\(denominator)"
+		}
 	}
 }
 
