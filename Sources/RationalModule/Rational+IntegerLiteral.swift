@@ -1,6 +1,6 @@
 extension Rational: ExpressibleByIntegerLiteral {
 	public typealias IntegerLiteralType = T.IntegerLiteralType
-	
+
 	@inlinable
 	public init(integerLiteral value: IntegerLiteralType) {
 		self.init(T(integerLiteral: value))
