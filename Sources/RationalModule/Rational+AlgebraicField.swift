@@ -8,32 +8,38 @@ extension Rational: AlgebraicField {
 	public var reciprocal: Self? {
 		// The reciprocal of `T.min/d` is `-d/-T.min`, which overflows.
 		guard !isZero && numerator != T.min else { return nil }
-		return if isNegative {
-			Self(numerator: -denominator, denominator: -numerator)
-		} else {
-			Self(numerator: denominator, denominator: numerator)
+
+		var numerator = self.denominator
+		var denominator = self.numerator
+
+		if denominator < 0 {
+			numerator.negate()
+			denominator.negate()
 		}
+
+		return Self(numerator: numerator, denominator: denominator)
 	}
 
 	@inlinable
 	public static func / (lhs: Self, rhs: Self) -> Self {
+		guard !rhs.isZero else { fatalError("Cannot divide by zero") }
+
 		let n1 = lhs.numerator
 		let d1 = lhs.denominator
 		let n2 = rhs.numerator
 		let d2 = rhs.denominator
 
-		guard !rhs.isZero else { fatalError("Cannot divide by zero") }
-
 		let g1 = gcd(n1, n2)
 		let g2 = gcd(d2, d1)
-		let numerator = (n1 / g1) * (d2 / g2)
-		let denominator = (d1 / g2) * (n2 / g1)
+		var numerator = (n1 / g1) * (d2 / g2)
+		var denominator = (d1 / g2) * (n2 / g1)
 
-		return if denominator < 0 {
-			Self(numerator: -numerator, denominator: -denominator)
-		} else {
-			Self(numerator: numerator, denominator: denominator)
+		if denominator < 0 {
+			numerator.negate()
+			denominator.negate()
 		}
+
+		return Self(numerator: numerator, denominator: denominator)
 	}
 
 	@inlinable
