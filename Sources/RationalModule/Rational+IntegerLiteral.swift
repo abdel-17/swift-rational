@@ -8,7 +8,7 @@ extension Rational: ExpressibleByIntegerLiteral {
 }
 
 extension Rational {
-	/// Converts the given integer value to a rational.
+	/// Converts the given integer to a rational value.
 	///
 	/// Equivalent to creating a rational value with numerator
 	/// equal to `value` and denominator `1`.

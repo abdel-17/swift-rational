@@ -2,13 +2,13 @@ public struct Rational<T: FixedWidthInteger & SignedInteger>: Hashable {
 	/// The numerator of this value.
 	///
 	/// This value is normalized so that it has no
-	/// common factors with `denominator`.
+	/// common factors with the denominator.
 	public let numerator: T
 
 	/// The denominator of this value.
 	///
 	/// This value is normalized so that it's positive and
-	/// has no common factors with `numerator`.
+	/// has no common factors with the numerator.
 	public let denominator: T
 
 	/// Creates a rational value with the given numerator and denominator.
@@ -28,7 +28,7 @@ public struct Rational<T: FixedWidthInteger & SignedInteger>: Hashable {
 
 // MARK: - Initializers
 extension Rational {
-	/// Creates a rational value from a fraction.
+	/// Creates a rational value from a fraction of integers.
 	///
 	/// The result is normalized so that the numerator and denominator
 	/// have no common factors and the denominator is positive.
@@ -110,7 +110,7 @@ extension Rational {
 	}
 
 	/// Returns the closest rational number to this value
-	/// with `denominator` at most `max`.
+	/// with a denominator at most `max`.
 	///
 	/// - Precondition: `max >= 1`
 	@inlinable
