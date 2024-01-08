@@ -87,6 +87,18 @@ extension Rational {
 	public var quotientAndRemainder: (quotient: T, remainder: T) {
 		numerator.quotientAndRemainder(dividingBy: denominator)
 	}
+
+	/// Whether or not this value is equal to zero.
+	@inlinable
+	var isZero: Bool {
+		numerator == 0
+	}
+
+	/// Whether or not this value is negative.
+	@inlinable
+	var isNegative: Bool {
+		numerator < 0
+	}
 }
 
 // MARK: - Helpers
