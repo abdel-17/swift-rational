@@ -11,7 +11,7 @@ extension Rational: AdditiveArithmetic {
 		let d1 = lhs.denominator
 		let n2 = rhs.numerator
 		let d2 = rhs.denominator
-		
+
 		let g = gcd(d1, d2)
 		guard g != 1 else {
 			return Rational(numerator: n1 * d2 + n2 * d1, denominator: d1 * d2)
@@ -29,7 +29,7 @@ extension Rational: AdditiveArithmetic {
 		let d1 = lhs.denominator
 		let n2 = rhs.numerator
 		let d2 = rhs.denominator
-		
+
 		let g = gcd(d1, d2)
 		guard g != 1 else {
 			return Rational(numerator: n1 * d2 - n2 * d1, denominator: d1 * d2)
