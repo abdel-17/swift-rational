@@ -70,6 +70,20 @@ extension Rational {
 
 // MARK: - Properties
 extension Rational {
+	/// The minimum representible rational value,
+	/// with numerator `T.min` and denominator `1`.
+	@inlinable
+	public static var min: Self {
+		Self(T.min)
+	}
+	
+	/// The maximum representible rational value,
+	/// with numerator `T.max` and denominator `1`.
+	@inlinable
+	public static var max: Self {
+		Self(T.max)
+	}
+	
 	/// The quotient of the numerator divided by the denominator.
 	@inlinable
 	public var quotient: T {
@@ -88,21 +102,40 @@ extension Rational {
 		numerator.quotientAndRemainder(dividingBy: denominator)
 	}
 
-	/// Whether or not this value is equal to zero.
+	/// Whether or not this value is equal to `0`.
 	@inlinable
-	var isZero: Bool {
+	public var isZero: Bool {
 		numerator == 0
 	}
 
 	/// Whether or not this value is negative.
 	@inlinable
-	var isNegative: Bool {
+	public var isNegative: Bool {
 		numerator < 0
+	}
+	
+	/// Whether or not this value represents an integer.
+	@inlinable
+	public var isInteger: Bool {
+		denominator == 1
+	}
+	
+	/// Whether or not the magnitude of this value is less than `1`.
+	@inlinable
+	public var isProperFraction: Bool {
+	   numerator.magnitude < denominator.magnitude
 	}
 }
 
 // MARK: - Helpers
 extension Rational {
+	/// Returns `-1` if this value is negative and `1` if it's positive;
+	/// otherwise, `0`.
+	@inlinable
+	public func signum() -> T {
+		numerator.signum()
+	}
+	
 	/// Returns the numerator and denominator as a tuple.
 	@inlinable
 	public func toRatio() -> (numerator: T, denominator: T) {
