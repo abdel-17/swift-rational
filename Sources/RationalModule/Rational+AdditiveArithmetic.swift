@@ -1,5 +1,5 @@
 extension Rational: AdditiveArithmetic {
-	/// The rational value with numerator and denominator both zero.
+	/// The additive identity, with numerator `1` and denominator `0`.
 	@inlinable
 	public static var zero: Self {
 		Self(0 as T)
