@@ -76,14 +76,14 @@ extension Rational {
 	public static var min: Self {
 		Self(T.min)
 	}
-	
+
 	/// The maximum representible rational value,
 	/// with numerator `T.max` and denominator `1`.
 	@inlinable
 	public static var max: Self {
 		Self(T.max)
 	}
-	
+
 	/// The quotient of the numerator divided by the denominator.
 	@inlinable
 	public var quotient: T {
@@ -113,17 +113,23 @@ extension Rational {
 	public var isNegative: Bool {
 		numerator < 0
 	}
-	
+
+	/// Whether or not this value is positive.
+	@inlinable
+	public var isPositive: Bool {
+		numerator > 0
+	}
+
 	/// Whether or not this value represents an integer.
 	@inlinable
 	public var isInteger: Bool {
 		denominator == 1
 	}
-	
+
 	/// Whether or not the magnitude of this value is less than `1`.
 	@inlinable
 	public var isProperFraction: Bool {
-	   numerator.magnitude < denominator.magnitude
+		numerator.magnitude < denominator.magnitude
 	}
 }
 
@@ -135,7 +141,7 @@ extension Rational {
 	public func signum() -> T {
 		numerator.signum()
 	}
-	
+
 	/// Returns the numerator and denominator as a tuple.
 	@inlinable
 	public func toRatio() -> (numerator: T, denominator: T) {
@@ -173,6 +179,61 @@ extension Rational {
 			Self(numerator: p1, denominator: q1)
 		} else {
 			Self(numerator: p0 + k * p1, denominator: q0 + k * q1)
+		}
+	}
+}
+
+// MARK: - Rounding
+extension Rational {
+	/// The greatest integer less than or equal to this value.
+	@inlinable
+	public var floor: T {
+		guard !isInteger else { return numerator }
+		return if isNegative {
+			quotient - 1
+		} else {
+			quotient
+		}
+	}
+
+	/// The smallest integer greater than or equal to this value.
+	@inlinable
+	public var ceil: T {
+		guard !isInteger else { return numerator }
+		return if isNegative {
+			quotient
+		} else {
+			quotient + 1
+		}
+	}
+
+	/// The closest integer to this value, or the one with
+	/// greater magnitude if two values are equally close.
+	@inlinable
+	public var rounded: T {
+		guard !isInteger else { return numerator }
+		// If the magnitude of the fractional part
+		// is less than 1/2, round towards zero.
+		//
+		// |r|    1
+		// --- < --- => 2 * |r| < |d|
+		// |d|    2
+		return if 2 * remainder.magnitude < denominator.magnitude {
+			quotient
+		} else {
+			roundedAwayFromZero
+		}
+	}
+
+	/// The closest integer whose magnitude is greater than
+	/// or equal to this value.
+	@inlinable
+	public var roundedAwayFromZero: T {
+		guard !isInteger else { return numerator }
+		return if isNegative {
+			quotient - 1
+		} else {
+			quotient + 1
 		}
 	}
 }
