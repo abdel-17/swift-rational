@@ -41,7 +41,7 @@ To use Swift Rational in a SwiftPM project:
 You can create a `Rational` value using the fraction initializer.
 ```swift
 let half = Rational(2, 4)
-print(x.numerator)		// 1
+print(x.numerator)	// 1
 print(x.denominator)	// 2
 ```
 
