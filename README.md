@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Swift Numerics provides the `RationalModule` module for working with rational numbers in Swift.
+Swift Rational provides the `RationalModule` module for working with rational numbers in Swift.
 ```swift
 import RationalModule
 
