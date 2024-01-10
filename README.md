@@ -65,4 +65,4 @@ Rational(1, 2) < Rational(3, 4)		// true
 ```
 
 ## Attributions
-A lot of the implementations were ported over to Swift from Python's [fractions module](https://github.com/python/cpython/blob/main/Lib/fractions.py).
+A lot of the implementations were ported over to Swift from Python's [fractions](https://github.com/python/cpython/blob/main/Lib/fractions.py) module.
