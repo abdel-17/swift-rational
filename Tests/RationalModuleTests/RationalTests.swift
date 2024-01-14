@@ -179,7 +179,7 @@ final class RationalTests: XCTestCase {
     
     func test_toRatio() {
         let testcases = (0 ..< 50).map { _ in
-            Rational(Int.random(in: -1_000_000_000 ... 1_000_000_000), Int.random(in: 0 ... 1_000_000_000))
+            Rational(Int.random(in: -1_000_000_000 ... 1_000_000_000), Int.random(in: 1 ... 1_000_000_000))
         }
         
         for testcase in testcases {
@@ -188,7 +188,17 @@ final class RationalTests: XCTestCase {
         }
     }
     
-    func test_limitDenominator() {
+    func test_limitDenominator_whenDenominatorIsLessThanMax() {
+        let testcases = (0 ..< 50).map { _ in
+            Rational(Int.random(in: -1_000_000 ... 1_000_000), Int.random(in: 1 ... 100_000))
+        }
+        
+        for testcase in testcases {
+            XCTAssertEqual(testcase.limitDenominator(to: 1_000_000), testcase)
+        }
+    }
+    
+    func test_limitDenominator_whenDenominatorIsLargerThanMax() {
         /// Random test cases created using the following Python script:
         ///
         /// ```
@@ -202,6 +212,7 @@ final class RationalTests: XCTestCase {
         ///     print(f"(Rational({fractions[i].numerator}, {fractions[i].denominator}), Rational({fractions[i].limit_denominator(10000000).numerator}, {fractions[i].limit_denominator(10000000).denominator})),")
         /// ```
         ///
+        /// Note: testcases where denominator is less than 10_000_000 have been manually removed.
         
         let testcases = [
             (Rational(-65799040, 325053649), Rational(-233695, 1154476)),
@@ -220,7 +231,6 @@ final class RationalTests: XCTestCase {
             (Rational(291041067, 11009488), Rational(246184160, 9312643)),
             (Rational(-121049263, 165896661), Rational(-2572855, 3526069)),
             (Rational(27899089, 81263855), Rational(2404625, 7004139)),
-            (Rational(16824433, 1865724), Rational(16824433, 1865724)),
             (Rational(747067270, 344016923), Rational(11909432, 5484173)),
             (Rational(174589585, 83378303), Rational(19143767, 9142440)),
             (Rational(-29266630, 46661233), Rational(-5477085, 8732387)),
@@ -248,7 +258,6 @@ final class RationalTests: XCTestCase {
             (Rational(-573409021, 802506185), Rational(-4648918, 6506325)),
             (Rational(836383762, 768328541), Rational(6980485, 6412494)),
             (Rational(-932109225, 854478229), Rational(-9692827, 8885557)),
-            (Rational(-637386781, 6852560), Rational(-637386781, 6852560)),
             (Rational(67420541, 52451458), Rational(11898806, 9256967)),
             (Rational(885851970, 344337881), Rational(7589244, 2950001)),
             (Rational(467523161, 434556658), Rational(3204327, 2978380)),
