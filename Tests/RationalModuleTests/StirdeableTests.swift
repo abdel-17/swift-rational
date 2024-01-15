@@ -13,10 +13,10 @@ final class StrideableTests: XCTestCase {
 		XCTAssertEqual(values, [0, .init(1, 4), .init(1, 2), .init(3, 4), 1])
 	}
 
-	func test_distanceTo_equals_1_4() throws {
-		let values: [Rational] = [0, .init(1, 4), .init(1, 2), .init(3, 4)]
-		for i in 0..<values.count - 1 {
-			XCTAssertEqual(values[i].distance(to: values[i + 1]), Rational(1, 4))
+	func test_distance_between_consecutive_values_equals_step() throws {
+		let values: [Rational] = [0, .init(1, 4), .init(1, 2), .init(3, 4), 1]
+		for i in 1..<values.endIndex {
+			XCTAssertEqual(values[i - 1].distance(to: values[i]), Rational(1, 4))
 		}
 	}
 }
