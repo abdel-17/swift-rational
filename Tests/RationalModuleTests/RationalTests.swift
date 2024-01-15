@@ -139,12 +139,12 @@ final class RationalTests: XCTestCase {
 			(Rational(-1, 7), -1),
 			(Rational(-0, 7), 0),
 		]
-		
+
 		for (rational, expected) in testCases {
 			XCTAssertEqual(rational.signum(), expected)
 		}
 	}
-	
+
 	func test_signum_int16() {
 		let testCases: [(Rational<Int16>, Int16)] = [
 			(Rational(1, 4), 1),
@@ -152,12 +152,12 @@ final class RationalTests: XCTestCase {
 			(Rational(-1, 7), -1),
 			(Rational(-0, 7), 0),
 		]
-		
+
 		for (rational, expected) in testCases {
 			XCTAssertEqual(rational.signum(), expected)
 		}
 	}
-	
+
 	func test_signum_int32() {
 		let testCases: [(Rational<Int32>, Int32)] = [
 			(Rational(1, 4), 1),
@@ -165,12 +165,12 @@ final class RationalTests: XCTestCase {
 			(Rational(-1, 7), -1),
 			(Rational(-0, 7), 0),
 		]
-		
+
 		for (rational, expected) in testCases {
 			XCTAssertEqual(rational.signum(), expected)
 		}
 	}
-	
+
 	func test_signum_int64() {
 		let testCases: [(Rational<Int>, Int)] = [
 			(Rational(1, 4), 1),
